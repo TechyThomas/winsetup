@@ -26,9 +26,33 @@ $title = @"
 "@
 
 Write-Host $title -ForegroundColor Magenta
-Write-Host "Installing packages..." -ForegroundColor Cyan
+
+# Registry tweaks
+
+Write-Host "Making reqistry tweaks..." -ForegroundColor Cyan
+
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarGlomLevel" -Value 1 # Show taskbar labels unless full
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "MMTaskbarGlomLevel" -Value 1 # Show taskbar labels on other monitors unless full
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "MMTaskbarMode" -Value 2 # Show apps only on taskbar of screen they are on
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowSecondsInSystemClock" -Value 1 # Show seconds in taskbar clock
+
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "AutoCheckSelect" -Value 0 # Hide item check boxes
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Value 1 # Show hidden files
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Value 0 # Show file extensions
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Value 1 # Go to This PC by default
+
+UpdateRegistry -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock" -Name "AllowDevelopmentWithoutDevLicense" -Value 1 # Enable developer mode
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" -Name "TaskbarEndTask" -Value 1 # Show end task in taskbar
+
+# Restart Windows Explorer to apply registry changes
+
+Write-Host "Restarting Windows Explorer..." -ForegroundColor Cyan
+taskkill /f /im explorer.exe
+start explorer.exe
 
 # Install packages
+
+Write-Host "Installing packages..." -ForegroundColor Cyan
 
 InstallPackage -PackageId "Discord.Discord" -PackageName "Discord"
 InstallPackage -PackageId "Microsoft.VisualStudioCode" -PackageName "VS Code"

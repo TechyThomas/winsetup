@@ -39,3 +39,48 @@ function InstallPackage {
         Write-Host "Failed to install $PackageName" -ForegroundColor Red
     }
 }
+
+function Test-RegistryValue {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Name
+    )
+
+    $exists = Get-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue
+
+    if (($null -ne $exists) -and ($exists.Length -ne 0)) {
+        return $true
+    }
+
+    return $false
+}
+
+function UpdateRegistry {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Name,
+
+        [Parameter(Mandatory = $true)]
+        $Value
+    )
+
+    # Create the key if it does not exist
+    If (-NOT (Test-Path $Path)) {
+        New-Item -Path $Path -Force | Out-Null
+    }
+
+    if (Test-RegistryValue -Path $Path -Name $Name) {
+        Set-ItemProperty -Path $Path -Name $Name -Value $Value
+        Write-Host "Set key $Name to ${Value}"
+    }
+    else {
+        New-ItemProperty -Path $Path -Name $Name -Value $Value -PropertyType DWORD -Force | Out-Null
+        Write-Host "Created key $Name with value ${Value}"
+    }
+}
