@@ -48,7 +48,7 @@ UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\A
 
 Write-Host "Restarting Windows Explorer..." -ForegroundColor Cyan
 taskkill /f /im explorer.exe
-start explorer.exe
+Start-Process explorer.exe
 
 # Install packages
 
