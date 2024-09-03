@@ -45,6 +45,10 @@ UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\A
 
 UpdateRegistry -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\AppModelUnlock" -Name "AllowDevelopmentWithoutDevLicense" -Value 1 # Enable developer mode
 UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" -Name "TaskbarEndTask" -Value 1 # Show end task in taskbar
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme" -Value 0 # Enable dark mode for apps
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "SystemUsesLightTheme" -Value 0 # Enable dark mode system wide
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "EnableTransparency" -Value 1 # Enable transparent effect
+UpdateRegistry -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "ColorPrevalence" -Value 0 # Disable accent colour on taskbar and windows
 
 # Restart Windows Explorer to apply registry changes
 
