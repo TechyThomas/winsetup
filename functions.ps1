@@ -49,7 +49,7 @@ function Test-RegistryValue {
         [string]$Name
     )
 
-    $exists = Get-ItemProperty -Path $Path -Name $Name -ErrorAction SilentlyContinue
+    $exists = Get-ItemProperty -LiteralPath $Path -Name $Name -ErrorAction SilentlyContinue
 
     if (($null -ne $exists) -and ($exists.Length -ne 0)) {
         return $true
@@ -67,20 +67,23 @@ function UpdateRegistry {
         [string]$Name,
 
         [Parameter(Mandatory = $true)]
-        $Value
+        $Value,
+
+        [Parameter(Mandatory = $false)]
+        $Type = "DWORD"
     )
 
     # Create the key if it does not exist
     If (-NOT (Test-Path $Path)) {
-        New-Item -Path $Path -Force | Out-Null
+        New-Item -LiteralPath $Path -Force | Out-Null
     }
 
     if (Test-RegistryValue -Path $Path -Name $Name) {
-        Set-ItemProperty -Path $Path -Name $Name -Value $Value
+        Set-ItemProperty -LiteralPath $Path -Name $Name -Value $Value
         Write-Host "Set key $Name to ${Value}"
     }
     else {
-        New-ItemProperty -Path $Path -Name $Name -Value $Value -PropertyType DWORD -Force | Out-Null
+        New-ItemProperty -LiteralPath $Path -Name $Name -Value $Value -PropertyType $Type -Force | Out-Null
         Write-Host "Created key $Name with value ${Value}"
     }
 }
