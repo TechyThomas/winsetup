@@ -75,7 +75,7 @@ function UpdateRegistry {
 
     # Create the key if it does not exist
     If (-NOT (Test-Path $Path)) {
-        New-Item -LiteralPath $Path -Force | Out-Null
+        New-Item -Path $Path -Force | Out-Null
     }
 
     if (Test-RegistryValue -Path $Path -Name $Name) {
