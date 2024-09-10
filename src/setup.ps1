@@ -1,6 +1,7 @@
 param (
   [switch]$config,
-  [switch]$apps
+  [switch]$apps,
+  [switch]$wallpaper
 )
 
 # Includes
@@ -32,10 +33,14 @@ $title = @"
 
 Write-Host $title -ForegroundColor Magenta
 
-if ($config -or (-not $config -and -not $apps)) {
+if ($config -or (-not $config -and -not $apps -and -not $wallpaper)) {
   & "$PSScriptRoot\scripts\set-config.ps1"
 }
 
-if ($apps -or (-not $config -and -not $apps)) {
+if ($apps -or (-not $config -and -not $apps -and -not $wallpaper)) {
   & "$PSScriptRoot\scripts\install-apps.ps1"
+}
+
+if ($wallpaper -or (-not $config -and -not $apps -and -not $wallpaper)) {
+  & "$PSScriptRoot\scripts\set-wallpaper.ps1"
 }
