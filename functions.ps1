@@ -30,7 +30,7 @@ function InstallPackage {
     }
 
     Write-Output "Installing $PackageName..."
-    winget install $PackageId --silent --accept-package-agreements --accept-source-agreements
+    winget install --id $PackageId --exact --silent --accept-package-agreements --accept-source-agreements
 
     # if (IsPackageInstalled($PackageId)) {
     #     Write-Host "$PackageName installed" -ForegroundColor Green
