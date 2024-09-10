@@ -29,7 +29,7 @@ function InstallPackage {
         return
     }
 
-    Write-Output "Installing $PackageName..."
+    Write-Host "Installing $PackageName..." -ForegroundColor Yellow
     winget install --id $PackageId --exact --silent --accept-package-agreements --accept-source-agreements
 
     # if (IsPackageInstalled($PackageId)) {
