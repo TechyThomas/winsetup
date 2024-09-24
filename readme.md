@@ -1,4 +1,4 @@
-# TechyThomas Win Setup Script
+# TechyThomas Windows Setup Script
 
 A custom script for setting up Windows how I like it and the common apps I always install and use.
 
@@ -67,4 +67,4 @@ https://github.com/ChrisTitusTech/nord-background
 
 Shout out to Chris Titus for the awesome compilation of backgrounds.
 
-*(Currently the backgrounds will only be downloaded to a directory in the user's Pictures folder. I'm still working on be able to set it to a slideshow)*
+*(Currently the backgrounds will only be downloaded to a directory in the user's Pictures folder. I'm still working on being able to set it to a slideshow)*
