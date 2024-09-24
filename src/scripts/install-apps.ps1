@@ -15,5 +15,6 @@ InstallPackage -PackageId "M2Team.NanaZip" -PackageName "NanaZip"
 InstallPackage -PackageId "AgileBits.1Password" -PackageName "1Password"
 InstallPackage -PackageId "Ytmdesktop.Ytmdesktop" -PackageName "YouTube Music"
 InstallPackage -PackageId "9WZDNCRD29V9" -PackageName "Offce 365"
+InstallPackage -PackageId "Foxit.FoxitReader" -PackageName "Foxit PDF Reader"
 
 Write-Host "Apps installed" -ForegroundColor Green
