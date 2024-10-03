@@ -3,7 +3,7 @@ param (
   [switch]$apps
 )
 
-$baseUrl = "https://raw.githubusercontent.com/TechyThomas/winsetup/main"
+$baseUrl = "https://raw.githubusercontent.com/TechyThomas/winsetup/main/src"
 
 # Function to download and execute scripts
 function Include-Script {
@@ -15,8 +15,18 @@ function Include-Script {
     Invoke-Expression $scriptContent
 }
 
-# Include functions
-Include-Script "includes/functions.ps1"
+# Include functions directly
+$functionsUrl = "$baseUrl/includes/functions.ps1"
+$functionsContent = (Invoke-WebRequest -Uri $functionsUrl -UseBasicParsing).Content
+
+try {
+    $functionsContent = (Invoke-WebRequest -Uri $functionsUrl -UseBasicParsing).Content
+    Invoke-Expression $functionsContent
+}
+catch {
+    Write-Error "Failed to load functions: $_"
+    exit 1
+}
 
 # Intro
 
