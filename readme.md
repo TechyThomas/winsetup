@@ -4,6 +4,15 @@ A custom script for setting up Windows how I like it and the common apps I alway
 
 *(Feel free to fork or clone and modify this script to suit your own needs)*
 
+## Running
+
+To run the script open Powershell as Administrator and run the following command:
+
+```powershell
+irm "https://setup.techythomas.com/win" | iex
+```
+
+*All files are served directly from this repo using GitHub raw urls.*
 
 ## Options
 
@@ -15,6 +24,11 @@ By default, the script will run through and install all apps and apply the prese
 | -apps| Install apps |
 | -wallpaper| Apply the wallpaper |
 
+For example, to run only the configuration part:
+
+```powershell
+iex "& { $(irm 'https://setup.techythomas.com/win') } -config"
+```
 
 ## Config
 
